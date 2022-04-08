@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dommel;
 using System.Data;
 
 namespace Locadora.Infrastructure
@@ -16,7 +17,6 @@ namespace Locadora.Infrastructure
         {
             var query = $"SHOW DATABASES";
             using var connection = _context.CreateMasterConnection();
-
             var records = connection.Query(query).ToList();
             if (!records.Any(x => x.Database == dbName))
                 connection.Execute($"CREATE DATABASE {dbName}");

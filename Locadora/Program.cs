@@ -1,4 +1,5 @@
 using FluentMigrator.Runner;
+using Locadora.Domain.Mappers;
 using Locadora.Infrastructure;
 using Locadora.Infrastructure.Extensions;
 using System.Reflection;
@@ -32,5 +33,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.Register();
 app.MigrateDatabase();
 app.Run();
