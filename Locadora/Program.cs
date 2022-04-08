@@ -1,15 +1,26 @@
+using FluentMigrator.Runner;
+using Locadora.Infrastructure;
+using Locadora.Infrastructure.Extensions;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddSingleton<AppDbContext>();
+builder.Services.AddSingleton<Database>();
+builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
+    .AddFluentMigratorCore()
+    .ConfigureRunner(c => c.AddMySql5()
+        .WithGlobalConnectionString(builder.Configuration.GetConnectionString("db"))
+        .ScanIn(Assembly.Load("Locadora.Infrastructure")).For.Migrations());
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,5 +32,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MigrateDatabase();
 app.Run();

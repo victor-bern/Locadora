@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Locadora.Domain.Entities
+﻿namespace Locadora.Domain.Entities
 {
     public class Rent
     {
         public int Id { get; set; }
+        public int ClientId { get; set; }
         public Client Client { get; set; }
+        public int MovieId { get; set; }
         public Movie Movie { get; set; }
         public DateTime RentDate { get; private set; }
         public DateTime ReturnDate { get; private set; }

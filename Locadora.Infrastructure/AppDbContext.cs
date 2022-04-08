@@ -1,18 +1,28 @@
-﻿using Locadora.Infrastructure.Mappings;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Locadora.Infrastructure
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private readonly IConfiguration _configuration;
+
+        public AppDbContext(IConfiguration configuration)
         {
-            optionsBuilder.UseMySQL("Server=localhost;Database=Locadora;Uid=root;Pwd=admin;");
+            _configuration = configuration;
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public IDbConnection CreateConnection()
         {
-            modelBuilder.ApplyConfiguration(new ClientMapping());
+            var db = _configuration.GetConnectionString("db");
+            return new MySqlConnection(db);
+        }
+
+        public IDbConnection CreateMasterConnection()
+        {
+            var db = _configuration.GetConnectionString("Masterdb");
+            return new MySqlConnection(db);
         }
     }
 }
