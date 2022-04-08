@@ -1,13 +1,16 @@
 using FluentMigrator.Runner;
 using Locadora.Domain.Mappers;
+using Locadora.Domain.Repositories;
 using Locadora.Infrastructure;
 using Locadora.Infrastructure.Extensions;
+using Locadora.Infrastructure.Repositories;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<AppDbContext>();
 builder.Services.AddSingleton<Database>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
     .AddFluentMigratorCore()
     .ConfigureRunner(c => c.AddMySql5()
@@ -15,6 +18,7 @@ builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
         .ScanIn(Assembly.Load("Locadora.Infrastructure")).For.Migrations());
 
 builder.Services.AddControllers();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
