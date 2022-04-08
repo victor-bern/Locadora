@@ -16,7 +16,7 @@ namespace Locadora.Infrastructure.Migrations
 
         public override void Down()
         {
-            Delete.Table("Client");
+            Delete.Table("Cliente");
         }
 
     }
