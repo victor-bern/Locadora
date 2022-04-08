@@ -13,4 +13,8 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Locadora.Domain\Locadora.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
