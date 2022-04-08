@@ -13,21 +13,23 @@ namespace Locadora.Infrastructure.Mappings
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
 
+            builder.HasIndex(x => new { x.Name, x.Document });
+
             builder.Property(x => x.Name)
-                .HasColumnName("name")
+                .HasColumnName("Nome")
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(150)
+                .HasMaxLength(200)
                 .IsRequired();
 
             builder.Property(x => x.Document)
-                .HasColumnName("document")
+                .HasColumnName("CPF")
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(11)
                 .IsRequired();
 
             builder.Property(x => x.BirthDay)
-                .HasColumnName("birth_day")
-                .HasColumnType("DATE")
+                .HasColumnName("DataNascimento")
+                .HasColumnType("DATETIME")
                 .IsRequired();
         }
     }
