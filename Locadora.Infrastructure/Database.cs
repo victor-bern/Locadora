@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System.Data;
 
 namespace Locadora.Infrastructure
 {
@@ -20,5 +21,7 @@ namespace Locadora.Infrastructure
             if (!records.Any(x => x.Database == dbName))
                 connection.Execute($"CREATE DATABASE {dbName}");
         }
+
+        public IDbConnection GetConnection() => _context.CreateConnection();
     }
 }
