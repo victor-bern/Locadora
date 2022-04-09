@@ -13,10 +13,10 @@ namespace Locadora.Dtos.Rent
         [Required]
         public int MovieId { get; set; }
 
-        [JsonPropertyName("DataAluguel")]
-        public DateTime RentDate { get; private set; }
+        [JsonPropertyName("DataLocacao")]
+        public DateTime RentDate { get; set; }
         [JsonPropertyName("DataDevolucao")]
-        public DateTime ReturnDate { get; private set; }
+        public DateTime ReturnDate { get; set; }
 
         public SaveRentDto()
         {
