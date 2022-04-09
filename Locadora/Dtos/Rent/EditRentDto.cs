@@ -18,7 +18,7 @@ namespace Locadora.Dtos.Rent
         [JsonPropertyName("DataDevolucao")]
         public DateTime ReturnDate { get; private set; }
 
-        public SaveRentDto()
+        public EditRentDto()
         {
             RentDate = DateTime.UtcNow;
         }
