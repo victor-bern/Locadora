@@ -2,9 +2,8 @@
 
 namespace Locadora.Domain.Entities
 {
-    public class Client
+    public class Client : Base
     {
-        public int Id { get; set; }
         [JsonPropertyName("Nome")]
         public string Name { get; set; }
         [JsonPropertyName("CPF")]

@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<AppDbContext>();
 builder.Services.AddSingleton<Database>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IRentRepository, RentRepository>();
 builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
     .AddFluentMigratorCore()
     .ConfigureRunner(c => c.AddMySql5()

@@ -4,7 +4,7 @@ using Locadora.Domain.Repositories;
 
 namespace Locadora.Infrastructure.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : Base
     {
         protected readonly Database _database;
 
@@ -43,6 +43,8 @@ namespace Locadora.Infrastructure.Repositories
             var entityExists = await connection.GetAsync<TEntity>(id);
 
             if (entityExists == null) return new Error("Não foi possível encontrar um item esse id");
+
+            entity.Id = id;
 
             await connection.UpdateAsync(entity);
 

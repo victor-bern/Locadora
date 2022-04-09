@@ -28,7 +28,7 @@ namespace Locadora.Controllers
         {
             var client = await _repository.GetById(id);
 
-            if (client == null) return NotFound(new Error("Não foi possível encontrar algo com esse id"));
+            if (client == null) return NotFound(new Error("Não foi possível encontrar um item com esse id"));
 
             return Ok(client);
         }

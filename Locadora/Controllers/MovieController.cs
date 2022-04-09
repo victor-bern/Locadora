@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Locadora.Controllers
 {
-    [Route("api/v1/movies")]
+    [Route("api/v1/filmes")]
     public class MovieController : BaseController<Movie, IMovieRepository>
     {
         public MovieController(IMovieRepository repository) : base(repository)

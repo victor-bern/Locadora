@@ -2,9 +2,8 @@
 
 namespace Locadora.Domain.Entities
 {
-    public class Rent
+    public class Rent : Base
     {
-        public int Id { get; set; }
         [JsonPropertyName("IdCliente")]
         public int ClientId { get; set; }
         [JsonIgnore]

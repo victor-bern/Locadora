@@ -2,9 +2,8 @@
 
 namespace Locadora.Domain.Entities
 {
-    public class Movie
+    public class Movie : Base
     {
-        public int Id { get; set; }
         [JsonPropertyName("Titulo")]
         public string Title { get; set; }
         [JsonPropertyName("ClassificacaoIndicativa")]

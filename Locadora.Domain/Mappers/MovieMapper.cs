@@ -9,6 +9,7 @@ namespace Locadora.Domain.Mappers
         {
             ToTable("Filme");
             Map(x => x.Id).ToColumn("Id").IsKey();
+            Map(x => x.Title).ToColumn("Titulo");
             Map(x => x.ParentalRating).ToColumn("ClassificacaoIndicativa");
             Map(x => x.IsReleased).ToColumn("Lancamento");
         }
