@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Locadora.Controllers
 {
-    [ApiController]
+    [Controller]
     public class BaseController<TEntity, TRepository> : ControllerBase
         where TEntity : class
         where TRepository : IBaseRepository<TEntity>

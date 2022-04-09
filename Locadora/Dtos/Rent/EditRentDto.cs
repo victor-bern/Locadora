@@ -1,29 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Locadora.Domain.Entities
+namespace Locadora.Dtos.Rent
 {
-    public class Rent : Base
+    public class EditRentDto
     {
         [JsonPropertyName("IdCliente")]
         [Required]
         public int ClientId { get; set; }
 
-        [JsonPropertyName("Cliente")]
-        public Client Client { get; set; }
-
         [JsonPropertyName("IdFilme")]
+        [Required]
         public int MovieId { get; set; }
 
-        [JsonPropertyName("Filme")]
-        public Movie Movie { get; set; }
-
         [JsonPropertyName("DataAluguel")]
-        public DateTime RentDate { get; set; }
+        public DateTime RentDate { get; private set; }
         [JsonPropertyName("DataDevolucao")]
-        public DateTime ReturnDate { get; set; }
+        public DateTime ReturnDate { get; private set; }
 
-        public Rent()
+        public SaveRentDto()
         {
             RentDate = DateTime.UtcNow;
         }
