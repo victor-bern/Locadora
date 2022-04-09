@@ -11,6 +11,8 @@ namespace Locadora.Domain.Mappers
             FluentMapper.Initialize(config =>
             {
                 config.AddMap(new ClientMapper());
+                config.AddMap(new MovieMapper());
+                config.AddMap(new RentMapper());
                 config.ForDommel();
             });
 
