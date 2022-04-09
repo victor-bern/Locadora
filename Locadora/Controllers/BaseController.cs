@@ -19,18 +19,18 @@ namespace Locadora.Controllers
         [HttpGet]
         public virtual async Task<IActionResult> GetAll()
         {
-            var clients = await _repository.GetAll();
-            return Ok(clients);
+            var entities = await _repository.GetAll();
+            return Ok(entities);
         }
 
         [HttpGet("{id:int}")]
         public virtual async Task<IActionResult> GetById(int id)
         {
-            var client = await _repository.GetById(id);
+            var entity = await _repository.GetById(id);
 
-            if (client == null) return NotFound(new Error("Não foi possível encontrar um item com esse id"));
+            if (entity == null) return NotFound(new Error("Não foi possível encontrar um item com esse id"));
 
-            return Ok(client);
+            return Ok(entity);
         }
 
         [HttpPost()]
