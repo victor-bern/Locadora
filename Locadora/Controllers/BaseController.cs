@@ -17,14 +17,14 @@ namespace Locadora.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public virtual async Task<IActionResult> GetAll()
         {
             var clients = await _repository.GetAll();
             return Ok(clients);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        public virtual async Task<IActionResult> GetById(int id)
         {
             var client = await _repository.GetById(id);
 
@@ -34,7 +34,7 @@ namespace Locadora.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> Save([FromBody] TEntity model)
+        public virtual async Task<IActionResult> Save([FromBody] TEntity model)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Locadora.Controllers
         }
 
         [HttpPut("edit/{id:int}")]
-        public async Task<IActionResult> Edit([FromBody] TEntity model, int id)
+        public virtual async Task<IActionResult> Edit([FromBody] TEntity model, int id)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Locadora.Controllers
         }
 
         [HttpDelete("delete/{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             try
             {
