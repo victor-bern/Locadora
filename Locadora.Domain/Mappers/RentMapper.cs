@@ -7,7 +7,7 @@ namespace Locadora.Domain.Mappers
     {
         public RentMapper()
         {
-            ToTable("Filme");
+            ToTable("Locacao");
             Map(x => x.Id).ToColumn("Id").IsKey();
             Map(x => x.ClientId).ToColumn("Id_Cliente");
             Map(x => x.MovieId).ToColumn("Id_Filme");

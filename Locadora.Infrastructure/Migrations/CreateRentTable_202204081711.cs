@@ -10,7 +10,7 @@ namespace Locadora.Infrastructure.Migrations
             Create!.Table("Locacao")
                 .WithColumn("Id").AsInt64().NotNullable().PrimaryKey().Indexed().Identity()
                 .WithColumn("Id_Cliente").AsInt64().NotNullable().ForeignKey("FK_Locacao_Cliente", "Cliente", "Id").Indexed("FK_Cliente_idx")
-                .WithColumn("Id_Filme").AsInt64().NotNullable().ForeignKey("FK_Locacao_Filme", "Cliente", "Id").Indexed("FK_Filme_idx")
+                .WithColumn("Id_Filme").AsInt64().NotNullable().ForeignKey("FK_Locacao_Filme", "Filme", "Id").Indexed("FK_Filme_idx")
                 .WithColumn("DataLocacao").AsDateTime().NotNullable()
                 .WithColumn("DataDevolucao").AsDateTime().NotNullable();
 

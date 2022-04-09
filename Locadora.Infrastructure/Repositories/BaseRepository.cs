@@ -12,7 +12,7 @@ namespace Locadora.Infrastructure.Repositories
         {
             _database = database;
         }
-        public async Task<IList<TEntity>?> GetAll()
+        public virtual async Task<IList<TEntity>?> GetAll()
         {
             using var connection = _database.GetConnection();
 
@@ -21,7 +21,7 @@ namespace Locadora.Infrastructure.Repositories
             return clients.ToList();
         }
 
-        public async Task<TEntity?> GetById(int id)
+        public virtual async Task<TEntity?> GetById(int id)
         {
             using var connection = _database.GetConnection();
 
@@ -29,14 +29,14 @@ namespace Locadora.Infrastructure.Repositories
 
             return client;
         }
-        public async Task Save(TEntity entity)
+        public virtual async Task Save(TEntity entity)
         {
             using var connection = _database.GetConnection();
 
             await connection.InsertAsync(entity);
         }
 
-        public async Task<Error?> Edit(TEntity entity, int id)
+        public virtual async Task<Error?> Edit(TEntity entity, int id)
         {
             using var connection = _database.GetConnection();
 
@@ -51,7 +51,7 @@ namespace Locadora.Infrastructure.Repositories
             return null;
         }
 
-        public async Task<Error?> Delete(int id)
+        public virtual async Task<Error?> Delete(int id)
         {
             using var connection = _database.GetConnection();
 

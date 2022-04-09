@@ -1,15 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Locadora.Domain.Entities
 {
     public class Rent : Base
     {
         [JsonPropertyName("IdCliente")]
+        [Required]
         public int ClientId { get; set; }
-        [JsonIgnore]
+
         public Client Client { get; set; }
+
         [JsonPropertyName("IdFilme")]
+        [Required]
         public int MovieId { get; set; }
+
         [JsonIgnore]
         public Movie Movie { get; set; }
 
@@ -21,7 +26,6 @@ namespace Locadora.Domain.Entities
         public Rent()
         {
             RentDate = DateTime.UtcNow;
-            ReturnDate = Movie.IsReleased ? DateTime.UtcNow.AddDays(2) : DateTime.UtcNow.AddDays(3);
         }
     }
 }
