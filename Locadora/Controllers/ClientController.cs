@@ -10,5 +10,13 @@ namespace Locadora.Controllers
         public ClientController(IClientRepository repository) : base(repository)
         {
         }
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var cliente = await _repository.GetByName(name);
+
+            return Ok(cliente);
+        }
     }
 }

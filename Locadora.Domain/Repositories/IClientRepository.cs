@@ -2,8 +2,8 @@
 
 namespace Locadora.Domain.Repositories
 {
-    public interface IClientRepository : BaseRepository<Client>
+    public interface IClientRepository : IBaseRepository<Client>
     {
-
+        Task<Client> GetByName(string name);
     }
 }

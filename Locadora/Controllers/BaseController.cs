@@ -7,9 +7,9 @@ namespace Locadora.Controllers
     [ApiController]
     public class BaseController<TEntity, TRepository> : ControllerBase
         where TEntity : class
-        where TRepository : BaseRepository<TEntity>
+        where TRepository : IBaseRepository<TEntity>
     {
-        private readonly TRepository _repository;
+        protected readonly TRepository _repository;
 
         public BaseController(TRepository repository)
         {
