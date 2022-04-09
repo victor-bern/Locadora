@@ -2,8 +2,8 @@
 
 namespace Locadora.Domain.Repositories
 {
-    public interface IClientRepository
+    public interface IClientRepository : BaseRepository<Client>
     {
-        Task<List<Client>> GetAll();
+
     }
 }
