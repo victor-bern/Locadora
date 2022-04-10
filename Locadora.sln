@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora", "Locadora\Locado
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora.Domain", "Locadora.Domain\Locadora.Domain.csproj", "{3D923412-68A3-4F94-93BC-873CA38CE560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora.Infrastructure", "Locadora.Infrastructure\Locadora.Infrastructure.csproj", "{0E68CC27-2DF7-435F-98D3-AB0FD7F86931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora.Infrastructure", "Locadora.Infrastructure\Locadora.Infrastructure.csproj", "{0E68CC27-2DF7-435F-98D3-AB0FD7F86931}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

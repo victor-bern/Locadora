@@ -17,11 +17,7 @@ namespace Locadora.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<IActionResult> GetAll()
-        {
-            var entities = await _repository.GetAll();
-            return Ok(entities);
-        }
+        public virtual async Task<IActionResult> GetAll() => Ok(await _repository.GetAll());
 
         [HttpGet("{id:int}")]
         public virtual async Task<IActionResult> GetById(int id)

@@ -28,16 +28,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Environment.IsProduction()) app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 app.Register();
 app.MigrateDatabase();
