@@ -1,40 +1,37 @@
 import axios from "axios";
 import { createContext, useState } from "react";
+import Cliente from "../Models/Cliente";
 import Filme from "../Models/Filme";
 
 interface LocadoraContextProps {
     filmes: Filme[],
-    rentModalIsOpen: boolean,
-    fetchFilmes: () => void,
-    openRentModal: () => void,
-    closeRentModal: () => void
+    clientes: Cliente[],
+    fetchFilmes: () => Promise<void>,
+    fetchClientes: () => Promise<void>
 }
 
 const initialState: LocadoraContextProps = {
     filmes: [],
-    rentModalIsOpen: false,
-    fetchFilmes: () => { },
-    openRentModal: () => { },
-    closeRentModal: () => { },
+    clientes: [],
+    fetchFilmes: async () => { },
+    fetchClientes: async () => { },
 }
 const locadoraContext = createContext<LocadoraContextProps>(initialState);
 
 const LocadoraContextProvider: React.FC = ({ children }) => {
     const [filmes, setFilmes] = useState<Filme[]>([]);
-    const [rentModalIsOpen, setRentModalIsOpen] = useState<boolean>(false)
+    const [clientes, setClientes] = useState<Cliente[]>([]);
     const fetchFilmes = async () => {
         const result = await axios.get<Filme[]>("https://localhost:7027/api/v1/filmes");
         setFilmes(result.data);
     }
-
-    const openRentModal = () => {
-        setRentModalIsOpen(true)
-    }
-    const closeRentModal = () => {
-        setRentModalIsOpen(false)
+    const fetchClientes = async () => {
+        const result = await axios.get<Cliente[]>("https://localhost:7027/api/v1/clientes");
+        setClientes(result.data);
     }
 
-    return <locadoraContext.Provider value={{ filmes, fetchFilmes, rentModalIsOpen, openRentModal, closeRentModal }}>
+
+    return <locadoraContext.Provider value={{ filmes, clientes, fetchFilmes, fetchClientes }}>
         {children}
     </locadoraContext.Provider>
 }

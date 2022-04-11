@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
                                 Filmes
                             </Button>
                         </Link>
-                        <Link to={"/"} style={{ textDecoration: "none" }}>
+                        <Link to={"/clientes"} style={{ textDecoration: "none" }}>
                             <Button
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
