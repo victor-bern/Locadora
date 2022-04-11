@@ -26,12 +26,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(p =>
 {
-    p.AddPolicy("cors", p =>
-     {
-         p.AllowAnyOrigin();
-         p.AllowAnyMethod();
-         p.AllowAnyMethod();
-     });
+    p.AddPolicy(name: "CorsPolicy",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                                  });
 });
 var app = builder.Build();
 
@@ -43,9 +42,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
 }
 
 if (app.Environment.IsProduction()) app.UseHttpsRedirection();
-app.UseCors("cors");
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors("CorsPolicy");
 app.Register();
 app.MigrateDatabase();
 app.Run();

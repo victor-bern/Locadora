@@ -1,5 +1,6 @@
 ﻿using Locadora.Domain.Entities;
 using Locadora.Domain.Repositories;
+using Locadora.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Locadora.Controllers
@@ -34,7 +35,7 @@ namespace Locadora.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
+                if (!ModelState.IsValid) return Ok(ModelState.GetErrors());
 
                 await _repository.Save(model);
 

@@ -4,26 +4,37 @@ import Filme from "../Models/Filme";
 
 interface LocadoraContextProps {
     filmes: Filme[],
-    fetchFilmes: () => void
+    rentModalIsOpen: boolean,
+    fetchFilmes: () => void,
+    openRentModal: () => void,
+    closeRentModal: () => void
 }
 
 const initialState: LocadoraContextProps = {
     filmes: [],
-    fetchFilmes: () => { }
+    rentModalIsOpen: false,
+    fetchFilmes: () => { },
+    openRentModal: () => { },
+    closeRentModal: () => { },
 }
 const locadoraContext = createContext<LocadoraContextProps>(initialState);
 
 const LocadoraContextProvider: React.FC = ({ children }) => {
     const [filmes, setFilmes] = useState<Filme[]>([]);
-
+    const [rentModalIsOpen, setRentModalIsOpen] = useState<boolean>(false)
     const fetchFilmes = async () => {
-        console.log("aa")
         const result = await axios.get<Filme[]>("https://localhost:7027/api/v1/filmes");
-        console.log(result);
         setFilmes(result.data);
     }
 
-    return <locadoraContext.Provider value={{ filmes, fetchFilmes }}>
+    const openRentModal = () => {
+        setRentModalIsOpen(true)
+    }
+    const closeRentModal = () => {
+        setRentModalIsOpen(false)
+    }
+
+    return <locadoraContext.Provider value={{ filmes, fetchFilmes, rentModalIsOpen, openRentModal, closeRentModal }}>
         {children}
     </locadoraContext.Provider>
 }

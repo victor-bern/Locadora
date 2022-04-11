@@ -29,11 +29,13 @@ namespace Locadora.Infrastructure.Repositories
 
             return client;
         }
-        public virtual async Task Save(TEntity entity)
+        public virtual async Task<int> Save(TEntity entity)
         {
             using var connection = _database.GetConnection();
 
-            await connection.InsertAsync(entity);
+            var id = await connection.InsertAsync(entity);
+
+            return Convert.ToInt32(id);
         }
 
         public virtual async Task<Error?> Edit(TEntity entity, int id)

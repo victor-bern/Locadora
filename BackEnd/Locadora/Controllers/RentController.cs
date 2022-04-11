@@ -1,19 +1,22 @@
 ﻿using Locadora.Domain.Entities;
 using Locadora.Domain.Repositories;
 using Locadora.Dtos.Rent;
+using Locadora.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Locadora.Controllers
 {
-    [ApiController]
+    [Controller]
     [Route("api/v1/alugueis")]
     public class RentController : ControllerBase
     {
         protected readonly IRentRepository _repository;
+        private readonly IClientRepository _clientRepository;
 
-        public RentController(IRentRepository repository)
+        public RentController(IRentRepository repository, IClientRepository clientRepository)
         {
             _repository = repository;
+            _clientRepository = clientRepository;
         }
 
         [HttpGet]
@@ -38,12 +41,22 @@ namespace Locadora.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                if (!ModelState.IsValid) return Ok(ModelState.GetErrors());
+
+                model.SetMovieReturnDate();
+
+                var client = await _clientRepository.GetByName(model.Client.Name);
+                int? clientId = null;
+                if (client == null)
+                {
+                    clientId = await _clientRepository.Save(model.Client);
+                }
 
                 var rent = new Rent
                 {
-                    ClientId = model.ClientId,
-                    MovieId = model.MovieId,
+                    ClientId = clientId ?? client.Id,
+                    MovieId = model.Movie.Id,
                     RentDate = model.RentDate,
                     ReturnDate = model.ReturnDate,
                 };

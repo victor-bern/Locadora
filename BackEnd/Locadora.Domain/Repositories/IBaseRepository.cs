@@ -6,7 +6,7 @@ namespace Locadora.Domain.Repositories
     {
         Task<IList<Entity>?> GetAll();
         Task<Entity?> GetById(int id);
-        Task Save(Entity entity);
+        Task<int> Save(Entity entity);
         Task<Error?> Edit(Entity entity, int id);
         Task<Error?> Delete(int id);
     }

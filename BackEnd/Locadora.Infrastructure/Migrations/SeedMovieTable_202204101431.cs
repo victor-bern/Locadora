@@ -2,7 +2,7 @@
 
 namespace Locadora.Infrastructure.Migrations
 {
-    [Migration(20220410143)]
+    [Migration(202204101413)]
     public class SeedMovieTable_202204101431 : Migration
     {
         public override void Up()
