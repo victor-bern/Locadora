@@ -24,7 +24,15 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors(p =>
+{
+    p.AddPolicy("cors", p =>
+     {
+         p.AllowAnyOrigin();
+         p.AllowAnyMethod();
+         p.AllowAnyMethod();
+     });
+});
 var app = builder.Build();
 
 
@@ -35,7 +43,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
 }
 
 if (app.Environment.IsProduction()) app.UseHttpsRedirection();
-
+app.UseCors("cors");
 app.UseAuthorization();
 app.MapControllers();
 app.Register();
