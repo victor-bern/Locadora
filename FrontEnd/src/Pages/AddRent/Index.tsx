@@ -23,8 +23,8 @@ const AddRent: React.FC = () => {
     const [openErrors, setOpenErrors] = useState(false)
     const validateFields = () => {
         const err: Error[] = []
-        if (clientId == 0) err.push({ message: "Cliente precisa ser selecionado" })
-        if (filmeId == 0) err.push({ message: "Filme precisa ser selecionado" })
+        if (clientId === 0) err.push({ message: "Cliente precisa ser selecionado" })
+        if (filmeId === 0) err.push({ message: "Filme precisa ser selecionado" })
 
         setErros(err);
     }
@@ -88,8 +88,8 @@ const AddRent: React.FC = () => {
                 setOpenErrors(true);
                 validateFields();
                 const rent: Aluguel = {
-                    Cliente: clientes.find(item => item.id == clientId)!,
-                    Filme: filmes.find(item => item.id == filmeId)!
+                    Cliente: clientes.find(item => item.id === clientId)!,
+                    Filme: filmes.find(item => item.id === filmeId)!
                 }
                 if (erros.length > 0) {
                     return;
