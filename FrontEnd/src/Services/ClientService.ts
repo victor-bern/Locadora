@@ -5,8 +5,8 @@ export const SaveClient = async (client: Cliente) => {
     await axios.post("http://localhost/api/v1/clientes", client);
 }
 
-export const EditClient = async (movie: Cliente, id: string) => {
-    await axios.put(`http://localhost/api/v1/clientes/edit/${id}`, movie);
+export const EditClient = async (client: Cliente, id: string) => {
+    await axios.put(`http://localhost/api/v1/clientes/edit/${id}`, client);
 }
 
 export const GetById = async (id: string): Promise<Cliente> => {

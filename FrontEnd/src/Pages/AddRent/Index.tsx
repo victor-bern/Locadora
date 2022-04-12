@@ -2,13 +2,15 @@ import { Alert, Button, FormControl, FormControlLabel, FormLabel, InputLabel, Me
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import locadoraContext from "../../Context/LocadoraContext";
+import Aluguel from "../../Models/Aluguel";
 import Error from "../../Models/Error";
-import Filme from "../../Models/Filme";
-import { SaveMovie } from "../../Services/MovieService";
+import { SaveRent } from "../../Services/RentService";
 import { Container } from "./styles";
 
 const AddRent: React.FC = () => {
     const { fetchClientes, fetchFilmes, filmes, clientes, erros, setErros, clearErrors } = useContext(locadoraContext)
+    const [clientId, setClientId] = useState<unknown>(0);
+    const [filmeId, setFilmeId] = useState<unknown>(0);
     useEffect(() => {
         const fetch = async () => {
             await fetchClientes();
@@ -21,16 +23,13 @@ const AddRent: React.FC = () => {
     const [openErrors, setOpenErrors] = useState(false)
     const validateFields = () => {
         const err: Error[] = []
-        // if (title.length <= 0) err.push({ message: "Campo titulo vazio" })
-        // if (parentalRating < 0) err.push({ message: "Classificação indicativa deve ser maior que 0" })
+        if (clientId == 0) err.push({ message: "Cliente precisa ser selecionado" })
+        if (filmeId == 0) err.push({ message: "Filme precisa ser selecionado" })
 
         setErros(err);
     }
 
-    const styles = {
-        width: 250,
-        margin: 16
-    }
+
     return (
         <Container>
             {erros.length > 0 && erros.map(err => {
@@ -51,6 +50,9 @@ const AddRent: React.FC = () => {
                             labelId="client-select"
                             id="client-select"
                             label="Clientes"
+                            onChange={(value) => {
+                                setClientId(value.target.value)
+                            }}
                         >
                             {clientes.map(cliente => {
                                 return (
@@ -68,18 +70,16 @@ const AddRent: React.FC = () => {
                             id="movie-select"
                             label="Clientes"
                             onChange={(value) => {
-                                console.log(value.target.value)
+                                setFilmeId(value.target.value)
                             }}
                         >
                             {filmes.map(filme => {
                                 return (
                                     <MenuItem value={filme.id!}>{filme.Titulo}</MenuItem>
-                             
-                                       )
-                                        
+                                )
+                            })}
                         </Select>
-                                    
-                                
+
                     </FormControl>
                 </>}
 
@@ -87,20 +87,19 @@ const AddRent: React.FC = () => {
                 clearErrors();
                 setOpenErrors(true);
                 validateFields();
-                // const movie: Filme = {
-                //     Titulo: title,
-                //     ClassificacaoIndicativa: parentalRating,
-                //     Lancamento: isReleased
-                // }
+                const rent: Aluguel = {
+                    Cliente: clientes.find(item => item.id == clientId)!,
+                    Filme: filmes.find(item => item.id == filmeId)!
+                }
                 if (erros.length > 0) {
                     return;
                 }
 
-                // await SaveMovie(movie);
-                navigate("/")
+                await SaveRent(rent);
+                navigate("/alugueis")
             }}>Enviar</Button>
-        </Container>
+        </Container >
     )
 }
 
-export default AddRent;
+export default AddRent; 

@@ -5,6 +5,6 @@ export default interface Aluguel {
     id?: number,
     Cliente: Cliente,
     Filme: Filme,
-    DataAluguel: string,
-    DataDevolucao: string
+    DataAluguel?: string,
+    DataDevolucao?: string
 }

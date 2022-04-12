@@ -2,6 +2,7 @@ import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableH
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import locadoraContext from "../../Context/LocadoraContext";
+import { DeleteRent } from "../../Services/RentService";
 
 const ListRents: React.FC = () => {
     const { fetchAlugueis, alugueis } = useContext(locadoraContext);
@@ -47,8 +48,8 @@ const ListRents: React.FC = () => {
                                     <Box>
                                         <Button><Link style={{ textDecoration: "none" }} to={"/clientes/editar/" + aluguel.id}>Editar</Link></Button>
                                         <Button color="error" onClick={async () => {
-                                            // await DeleteClient(cliente.id!.toString())
-                                            // await fetchClientes();
+                                            await DeleteRent(aluguel.id!.toString())
+                                            await fetchAlugueis();
                                         }}>Deletar</Button>
                                     </Box>
                                 </TableCell>
