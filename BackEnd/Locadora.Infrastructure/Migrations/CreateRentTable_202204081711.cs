@@ -9,11 +9,22 @@ namespace Locadora.Infrastructure.Migrations
         {
             Create!.Table("Locacao")
                 .WithColumn("Id").AsInt64().NotNullable().PrimaryKey().Indexed().Identity()
-                .WithColumn("Id_Cliente").AsInt64().NotNullable().ForeignKey("FK_Locacao_Cliente", "Cliente", "Id").Indexed("FK_Cliente_idx")
-                .WithColumn("Id_Filme").AsInt64().NotNullable().ForeignKey("FK_Locacao_Filme", "Filme", "Id").Indexed("FK_Filme_idx")
+                .WithColumn("Id_Cliente").AsInt64().NotNullable()
+                .WithColumn("Id_Filme").AsInt64().NotNullable()
                 .WithColumn("DataLocacao").AsDateTime().NotNullable()
                 .WithColumn("DataDevolucao").AsDateTime().NotNullable();
 
+            Create.ForeignKey("FK_Locacao_Cliente")
+                .FromTable("Locacao")
+                .ForeignColumn("Id_Cliente")
+                .ToTable("Cliente").PrimaryColumn("Id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
+
+            Create.ForeignKey("FK_Locacao_Filme")
+                .FromTable("Locacao")
+                .ForeignColumn("Id_Filme")
+                .ToTable("Filme").PrimaryColumn("Id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
         }
 
         public override void Down()
