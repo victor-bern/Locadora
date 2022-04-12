@@ -2,20 +2,23 @@ import { useEffect, useState } from "react";
 import { Alert, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Snackbar, TextField } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import Filme from "../../Models/Filme";
-import { GetById } from "../../Services/MovieService";
+import { EditMovie, GetById } from "../../Services/MovieService";
 import Error from "../../Models/Error";
 import { Container } from "./styles";
 
-const EditMovie: React.FC = () => {
+const EditMoviePage: React.FC = () => {
     const [movie, setMovie] = useState<Filme | null>(null)
     const { id } = useParams()
     useEffect(() => {
         const fetch = async () => {
             const movie = await GetById(id!)
             setMovie(movie);
+            setTitle(movie.Titulo);
+            setParentalRating(movie.ClassificacaoIndicativa)
+            setIsReleased(movie.Lancamento)
         }
         fetch();
-    }, [])
+    }, [id])
     const navigate = useNavigate();
     const [title, setTitle] = useState<string>("");
     const [parentalRating, setParentalRating] = useState<number>(0);
@@ -84,7 +87,7 @@ const EditMovie: React.FC = () => {
                         return;
                     }
 
-                    // await SaveMovie(movie);
+                    await EditMovie(movie, id!);
                     navigate("/")
                 }}>Enviar</Button>
             </>
@@ -94,4 +97,4 @@ const EditMovie: React.FC = () => {
 }
 
 
-export default EditMovie;
+export default EditMoviePage;

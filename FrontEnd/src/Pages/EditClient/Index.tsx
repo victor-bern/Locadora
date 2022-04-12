@@ -1,13 +1,26 @@
 import { Alert, Button, InputLabel, Snackbar, TextField } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import locadoraContext from "../../Context/LocadoraContext";
 import Cliente from "../../Models/Cliente";
 import Error from "../../Models/Error";
-import { SaveClient } from "../../Services/ClientService";
+import { EditClient, GetById, SaveClient } from "../../Services/ClientService";
 import { Container } from "./styles";
 
-const AddClient: React.FC = () => {
+const EditClientPage: React.FC = () => {
+    const [client, setClient] = useState<Cliente | null>(null)
+    const { id } = useParams()
+    useEffect(() => {
+        const fetch = async () => {
+            const client = await GetById(id!)
+            setClient(client);
+            setName(client.Nome)
+            setDocument(client.CPF)
+            setBirthDate(client.DataNascimento)
+        }
+        fetch();
+    }, [id])
+
     const { erros, setErros, clearErrors } = useContext(locadoraContext)
     const navigate = useNavigate()
     const [name, setName] = useState<string>("");
@@ -47,30 +60,34 @@ const AddClient: React.FC = () => {
                     </Snackbar>
                 )
             })}
+            {client != null &&
+                <>
+                    <TextField style={styles} defaultValue={client.Nome} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
+                    <TextField style={styles} defaultValue={client.CPF} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
+                    <InputLabel>Data de Nascimento</InputLabel>
+                    <input type="date" defaultValue={client.DataNascimento} onChange={handleBirthDate} />
 
-            <TextField style={styles} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
-            <TextField style={styles} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
-            <InputLabel>Data de Nascimento</InputLabel>
-            <input type="date" onChange={handleBirthDate} />
+                    <Button onClick={async () => {
+                        clearErrors();
+                        setOpenErrors(true);
+                        validateFields();
+                        const client: Cliente = {
+                            Nome: name,
+                            CPF: document,
+                            DataNascimento: birthDate
+                        }
+                        if (erros.length > 0) {
+                            return;
+                        }
+                        await EditClient(client, id!)
+                        navigate("/clientes")
 
-            <Button onClick={async () => {
-                clearErrors();
-                setOpenErrors(true);
-                validateFields();
-                const client: Cliente = {
-                    Nome: name,
-                    CPF: document,
-                    DataNascimento: birthDate
-                }
-                if (erros.length > 0) {
-                    return;
-                }
-                await SaveClient(client)
-                navigate("/clientes")
+                    }}>Enviar</Button>
+                </>
+            }
 
-            }}>Enviar</Button>
         </Container>
     )
 }
 
-export default AddClient;
+export default EditClientPage;

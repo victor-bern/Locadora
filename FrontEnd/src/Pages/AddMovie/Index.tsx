@@ -1,6 +1,7 @@
 import { Alert, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Snackbar, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import locadoraContext from "../../Context/LocadoraContext";
 import Error from "../../Models/Error";
 import Filme from "../../Models/Filme";
 import { SaveMovie } from "../../Services/MovieService";
@@ -8,17 +9,17 @@ import { Container } from "./styles";
 
 const AddMovie: React.FC = () => {
     const navigate = useNavigate()
+    const { erros, setErros, clearErrors } = useContext(locadoraContext)
     const [title, setTitle] = useState<string>("");
     const [parentalRating, setParentalRating] = useState<number>(0);
     const [isReleased, setIsReleased] = useState<boolean>(false);
-    const [errors, setErrors] = useState<Error[]>([])
-    const [openErrors, setOpenErrors] = useState(true)
+    const [openErrors, setOpenErrors] = useState(false)
     const validateFields = () => {
         const err: Error[] = []
         if (title.length <= 0) err.push({ message: "Campo titulo vazio" })
         if (parentalRating < 0) err.push({ message: "Classificação indicativa deve ser maior que 0" })
 
-        setErrors(err);
+        setErros(err);
     }
 
     const handleParental = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,7 @@ const AddMovie: React.FC = () => {
     }
     return (
         <Container>
-            {errors.length > 0 && errors.map(err => {
+            {erros.length > 0 && erros.map(err => {
                 return (
                     <Snackbar open={openErrors} autoHideDuration={3000} onClose={() => setOpenErrors(false)} >
                         <Alert severity="warning" sx={{ width: '100%' }}>
@@ -63,15 +64,15 @@ const AddMovie: React.FC = () => {
             </FormControl>
 
             <Button onClick={async () => {
-                setErrors([]);
+                clearErrors();
                 setOpenErrors(true);
+                validateFields();
                 const movie: Filme = {
                     Titulo: title,
                     ClassificacaoIndicativa: parentalRating,
                     Lancamento: isReleased
                 }
-                validateFields();
-                if (errors.length > 0) {
+                if (erros.length > 0) {
                     return;
                 }
 
