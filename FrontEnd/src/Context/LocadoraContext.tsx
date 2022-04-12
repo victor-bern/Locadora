@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useState } from "react";
+import Aluguel from "../Models/Aluguel";
 import Cliente from "../Models/Cliente";
 import Error from "../Models/Error";
 import Filme from "../Models/Filme";
@@ -7,9 +8,11 @@ import Filme from "../Models/Filme";
 interface LocadoraContextProps {
     filmes: Filme[],
     clientes: Cliente[],
+    alugueis: Aluguel[],
     erros: Error[],
     fetchFilmes: () => Promise<void>,
     fetchClientes: () => Promise<void>
+    fetchAlugueis: () => Promise<void>
     setErros: (erros: Error[]) => void,
     clearErrors: () => void
 }
@@ -17,9 +20,11 @@ interface LocadoraContextProps {
 const initialState: LocadoraContextProps = {
     filmes: [],
     clientes: [],
+    alugueis: [],
     erros: [],
     fetchFilmes: async () => { },
     fetchClientes: async () => { },
+    fetchAlugueis: async () => { },
     setErros: (erros: Error[]) => { },
     clearErrors: () => { }
 }
@@ -28,6 +33,7 @@ const locadoraContext = createContext<LocadoraContextProps>(initialState);
 const LocadoraContextProvider: React.FC = ({ children }) => {
     const [filmes, setFilmes] = useState<Filme[]>([]);
     const [clientes, setClientes] = useState<Cliente[]>([]);
+    const [alugueis, setAlugueis] = useState<Aluguel[]>([]);
     const [erros, setErrs] = useState<Error[]>([])
     const fetchFilmes = async () => {
         const result = await axios.get<Filme[]>("https://localhost:7027/api/v1/filmes");
@@ -36,6 +42,10 @@ const LocadoraContextProvider: React.FC = ({ children }) => {
     const fetchClientes = async () => {
         const result = await axios.get<Cliente[]>("https://localhost:7027/api/v1/clientes");
         setClientes(result.data);
+    }
+    const fetchAlugueis = async () => {
+        const result = await axios.get<Aluguel[]>("https://localhost:7027/api/v1/alugueis");
+        setAlugueis(result.data);
     }
 
     const setErros = (erros: Error[]) => {
@@ -48,7 +58,7 @@ const LocadoraContextProvider: React.FC = ({ children }) => {
     }
 
 
-    return <locadoraContext.Provider value={{ filmes, clientes, erros, setErros, clearErrors, fetchFilmes, fetchClientes }}>
+    return <locadoraContext.Provider value={{ filmes, clientes, alugueis, erros, setErros, clearErrors, fetchFilmes, fetchClientes, fetchAlugueis }}>
         {children}
     </locadoraContext.Provider>
 }

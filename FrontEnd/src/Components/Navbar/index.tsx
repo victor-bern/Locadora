@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
                                 Clientes
                             </Button>
                         </Link>
-                        <Link to={"/"} style={{ textDecoration: "none" }}>
+                        <Link to={"/alugueis"} style={{ textDecoration: "none" }}>
                             <Button
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
