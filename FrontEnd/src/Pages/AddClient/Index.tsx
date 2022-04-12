@@ -48,8 +48,8 @@ const AddClient: React.FC = () => {
                 )
             })}
 
-            <TextField style={styles} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
-            <TextField style={styles} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
+            <TextField required style={styles} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
+            <TextField required style={styles} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
             <InputLabel>Data de Nascimento</InputLabel>
             <input type="date" onChange={handleBirthDate} />
 

@@ -62,8 +62,8 @@ const EditClientPage: React.FC = () => {
             })}
             {client != null &&
                 <>
-                    <TextField style={styles} defaultValue={client.Nome} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
-                    <TextField style={styles} defaultValue={client.CPF} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
+                    <TextField required style={styles} defaultValue={client.Nome} id="standard-basic" onChange={handleName} label="Nome do Cliente" variant="standard" />
+                    <TextField required style={styles} defaultValue={client.CPF} onChange={handleDocument} id="standard-basic" label="CPF" variant="standard" />
                     <InputLabel>Data de Nascimento</InputLabel>
                     <input type="date" defaultValue={client.DataNascimento} onChange={handleBirthDate} />
 

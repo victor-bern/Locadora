@@ -12,35 +12,35 @@ namespace Locadora.Infrastructure.Migrations
              {
                  Titulo = "O Poderoso Chefão",
                  ClassificacaoIndicativa = 14,
-                 Lancamento = false
+                 Lancamento = 1972
              });
             Insert.IntoTable("Filme")
              .Row(new
              {
                  Titulo = "Harry Potter",
                  ClassificacaoIndicativa = 0,
-                 Lancamento = false
+                 Lancamento = 2001
              });
             Insert.IntoTable("Filme")
              .Row(new
              {
                  Titulo = "Morbius",
                  ClassificacaoIndicativa = 14,
-                 Lancamento = true
+                 Lancamento = 2022
              });
             Insert.IntoTable("Filme")
              .Row(new
              {
                  Titulo = "Green Book",
                  ClassificacaoIndicativa = 10,
-                 Lancamento = false
+                 Lancamento = 2020
              });
             Insert.IntoTable("Filme")
              .Row(new
              {
                  Titulo = "Doutor Estranho No Multiverso da Loucura",
                  ClassificacaoIndicativa = 14,
-                 Lancamento = true
+                 Lancamento = 2022
              });
         }
 

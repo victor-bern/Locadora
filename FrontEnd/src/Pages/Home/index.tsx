@@ -40,7 +40,7 @@ const Home: React.FC = () => {
                                 </TableCell>
                                 <TableCell align="left">{filme.Titulo}</TableCell>
                                 <TableCell align="left">{filme.ClassificacaoIndicativa == 0 ? "Livre" : filme.ClassificacaoIndicativa + " anos"}</TableCell>
-                                <TableCell align="left">{filme.Lancamento ? "Sim" : "Não"}</TableCell>
+                                <TableCell align="left">{filme.Lancamento}</TableCell>
                                 <TableCell align="left">
                                     <Box>
                                         <Button><Link style={{ textDecoration: "none" }} to={"/filmes/editar/" + filme.id}>Editar</Link></Button>

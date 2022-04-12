@@ -12,12 +12,13 @@ const AddMovie: React.FC = () => {
     const { erros, setErros, clearErrors } = useContext(locadoraContext)
     const [title, setTitle] = useState<string>("");
     const [parentalRating, setParentalRating] = useState<number>(0);
-    const [isReleased, setIsReleased] = useState<boolean>(false);
+    const [releasedYear, setreleasedYear] = useState<number>(0);
     const [openErrors, setOpenErrors] = useState(false)
     const validateFields = () => {
         const err: Error[] = []
         if (title.length <= 0) err.push({ message: "Campo titulo vazio" })
         if (parentalRating < 0) err.push({ message: "Classificação indicativa deve ser maior que 0" })
+        if (releasedYear <= 0) err.push({ message: "Ano de lançamento deve ser maior que 0" })
 
         setErros(err);
     }
@@ -29,7 +30,7 @@ const AddMovie: React.FC = () => {
         setTitle(event.currentTarget.value);
     }
     const handleReleased = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsReleased(event.currentTarget.value === "Sim" ? true : false);
+        setreleasedYear(Number.parseInt(event.currentTarget.value));
     }
     const styles = {
         width: 250,
@@ -47,21 +48,10 @@ const AddMovie: React.FC = () => {
                 )
             })}
 
-            <TextField style={styles} id="standard-basic" onChange={handleTitle} label="Titulo do Filme" variant="standard" />
-            <TextField style={styles} type={"number"} onChange={handleParental} defaultValue={0} id="standard-basic" label="Classificação Indicativa" variant="standard" />
-            <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Lançamento</FormLabel>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="Sim"
-                    name="radio-buttons-group"
-                    onChange={handleReleased}
-                >
-                    <FormControlLabel value="Sim" control={<Radio />} label="Sim" />
-                    <FormControlLabel value="Não" control={<Radio />} label="Não" />
-                </RadioGroup>
-            </FormControl>
+            <TextField required style={styles} id="standard-basic" onChange={handleTitle} label="Titulo do Filme" variant="standard" />
+            <TextField required style={styles} type={"number"} onChange={handleParental} id="standard-basic" label="Classificação Indicativa" variant="standard" />
+            <TextField required style={styles} type={"number"} onChange={handleReleased} id="standard-basic" label="Ano de Lançamento" variant="standard" />
+
 
             <Button onClick={async () => {
                 clearErrors();
@@ -70,7 +60,7 @@ const AddMovie: React.FC = () => {
                 const movie: Filme = {
                     Titulo: title,
                     ClassificacaoIndicativa: parentalRating,
-                    Lancamento: isReleased
+                    Lancamento: releasedYear
                 }
                 if (erros.length > 0) {
                     return;
