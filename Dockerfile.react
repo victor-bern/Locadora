@@ -1,0 +1,9 @@
+
+FROM node:16.14.2
+
+WORKDIR /app
+
+COPY FrontEnd ./
+RUN yarn 
+COPY . .
+CMD ["yarn", "start"]
