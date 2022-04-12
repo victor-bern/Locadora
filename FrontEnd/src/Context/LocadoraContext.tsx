@@ -36,15 +36,15 @@ const LocadoraContextProvider: React.FC = ({ children }) => {
     const [alugueis, setAlugueis] = useState<Aluguel[]>([]);
     const [erros, setErrs] = useState<Error[]>([])
     const fetchFilmes = async () => {
-        const result = await axios.get<Filme[]>("https://localhost:7027/api/v1/filmes");
+        const result = await axios.get<Filme[]>("http://localhost/api/v1/filmes");
         setFilmes(result.data);
     }
     const fetchClientes = async () => {
-        const result = await axios.get<Cliente[]>("https://localhost:7027/api/v1/clientes");
+        const result = await axios.get<Cliente[]>("http://localhost/api/v1/clientes");
         setClientes(result.data);
     }
     const fetchAlugueis = async () => {
-        const result = await axios.get<Aluguel[]>("https://localhost:7027/api/v1/alugueis");
+        const result = await axios.get<Aluguel[]>("http://localhost/api/v1/alugueis");
         setAlugueis(result.data);
     }
 

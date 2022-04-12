@@ -15,8 +15,8 @@ const ListRents: React.FC = () => {
     }, [])
     return (
         <>
-            <Link to={"/clientes/add"}>
-                <Button style={{ display: "flex", alignSelf: "flex-end" }}>Adicionar Cliente</Button>
+            <Link to={"/alugueis/add"}>
+                <Button style={{ display: "flex", alignSelf: "flex-end" }}>Adicionar Aluguel</Button>
             </Link>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
