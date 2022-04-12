@@ -46,16 +46,9 @@ namespace Locadora.Controllers
 
                 model.SetMovieReturnDate();
 
-                var client = await _clientRepository.GetByName(model.Client.Name);
-                int? clientId = null;
-                if (client == null)
-                {
-                    clientId = await _clientRepository.Save(model.Client);
-                }
-
                 var rent = new Rent
                 {
-                    ClientId = clientId ?? client.Id,
+                    ClientId = model.Client.Id,
                     MovieId = model.Movie.Id,
                     RentDate = model.RentDate,
                     ReturnDate = model.ReturnDate,
