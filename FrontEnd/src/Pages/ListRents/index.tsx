@@ -45,6 +45,7 @@ const ListRents: React.FC = () => {
                                 <TableCell align="left">{aluguel.DataDevolucao}</TableCell>
                                 <TableCell align="left">
                                     <Box>
+                                        <Button><Link style={{ textDecoration: "none" }} to={"/alugueis/editar/" + aluguel.id}>Editar</Link></Button>
                                         <Button color="error" onClick={async () => {
                                             await DeleteRent(aluguel.id!.toString())
                                             await fetchAlugueis();

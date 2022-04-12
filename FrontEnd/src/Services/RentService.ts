@@ -7,6 +7,10 @@ export const SaveRent = async (rent: Aluguel) => {
     await axios.post(`http://${envApp}/api/v1/alugueis`, rent);
 }
 
+export const EditRent = async (rent: Aluguel, id: string) => {
+    await axios.put(`http://${envApp}/api/v1/alugueis/edit/${id}`, rent);
+}
+
 export const GetById = async (id: string): Promise<Aluguel> => {
     const result = await axios.get<Aluguel>(`http://${envApp}/api/v1/alugueis/${id}`);
 

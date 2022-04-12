@@ -74,12 +74,10 @@ namespace Locadora.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var rent = new Rent
-                {
-                    ClientId = model.ClientId,
-                    MovieId = model.MovieId,
-                };
+                var rent = await _repository.GetById(id);
 
+                rent.ClientId = model.Client.Id;
+                rent.MovieId = model.Movie.Id;
 
                 var error = await _repository.Edit(rent, id);
 

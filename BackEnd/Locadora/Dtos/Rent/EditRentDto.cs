@@ -1,17 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Locadora.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Locadora.Dtos.Rent
 {
     public class EditRentDto
     {
-        [JsonPropertyName("IdCliente")]
+        [JsonPropertyName("Cliente")]
         [Required]
-        public int ClientId { get; set; }
+        public Client Client { get; set; }
 
-        [JsonPropertyName("IdFilme")]
+        [JsonPropertyName("Filme")]
         [Required]
-        public int MovieId { get; set; }
+        public Movie Movie { get; set; }
 
     }
 }

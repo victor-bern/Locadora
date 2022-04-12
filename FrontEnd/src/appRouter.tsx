@@ -5,6 +5,7 @@ import AddMovie from "./Pages/AddMovie/Index";
 import AddRent from "./Pages/AddRent/Index";
 import EditClientPage from "./Pages/EditClient/Index";
 import EditMoviePage from "./Pages/EditMovie";
+import EditRentPage from "./Pages/EditRent/Index";
 import Home from "./Pages/Home";
 import ListClients from "./Pages/ListClients";
 import ListRents from "./Pages/ListRents";
@@ -22,6 +23,7 @@ const AppRouter: React.FC = () => {
                 <Route path="/filmes/editar/:id" element={<EditMoviePage />} />
                 <Route path="/alugueis" element={<ListRents />} />
                 <Route path="/alugueis/add" element={<AddRent />} />
+                <Route path="/alugueis/editar/:id" element={<EditRentPage />} />
                 <Route path="/relatorios" element={<Reports />} />
             </Routes>
         </BrowserRouter>
