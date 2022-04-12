@@ -38,6 +38,13 @@ const NavBar: React.FC = () => {
                                 Locações
                             </Button>
                         </Link>
+                        <Link to={"/relatorios"} style={{ textDecoration: "none" }}>
+                            <Button
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Relatorios
+                            </Button>
+                        </Link>
                     </Box>
                 </Toolbar>
             </Container>

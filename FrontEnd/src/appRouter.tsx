@@ -8,6 +8,7 @@ import EditMoviePage from "./Pages/EditMovie";
 import Home from "./Pages/Home";
 import ListClients from "./Pages/ListClients";
 import ListRents from "./Pages/ListRents";
+import Reports from "./Pages/Reports";
 const AppRouter: React.FC = () => {
     return (
         <BrowserRouter>
@@ -21,7 +22,7 @@ const AppRouter: React.FC = () => {
                 <Route path="/filmes/editar/:id" element={<EditMoviePage />} />
                 <Route path="/alugueis" element={<ListRents />} />
                 <Route path="/alugueis/add" element={<AddRent />} />
-
+                <Route path="/relatorios" element={<Reports />} />
             </Routes>
         </BrowserRouter>
     )

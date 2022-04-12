@@ -35,6 +35,8 @@ namespace Locadora.Controllers
 
             return Ok(entity);
         }
+        [HttpGet("com-atraso")]
+        public async Task<IActionResult> GetAllWithLate() => Ok(await _repository.RentsWithLate());
 
         [HttpPost()]
         public virtual async Task<IActionResult> Save([FromBody] SaveRentDto model)

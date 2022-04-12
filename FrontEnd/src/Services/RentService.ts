@@ -20,3 +20,9 @@ export const GetById = async (id: string): Promise<Aluguel> => {
 export const DeleteRent = async (id: string): Promise<void> => {
     await axios.delete(`http://${envApp}/api/v1/alugueis/delete/${id}`);
 }
+
+export const RentsWithLate = async (): Promise<Aluguel[]> => {
+    const rents = await axios.get<Aluguel[]>(`http://${envApp}/api/v1/alugueis/com-atraso`)
+
+    return rents.data;
+}

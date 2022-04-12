@@ -30,5 +30,14 @@ namespace Locadora.Infrastructure.Repositories
             return rent;
 
         }
+
+        public async Task<IList<Rent>> RentsWithLate()
+        {
+            using var connection = _database.GetConnection();
+
+            var rents = await connection.SelectAsync<Rent, Movie, Client, Rent>(item => item.ReturnDate < DateTime.UtcNow);
+
+            return rents.ToList();
+        }
     }
 }
