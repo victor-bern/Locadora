@@ -1,7 +1,7 @@
 import axios from "axios"
 import Aluguel from "../Models/Aluguel";
 
-const envApp = process.env.APP ?? "localhost"
+const envApp = process.env.APP ?? "localhost:5027"
 
 export const SaveRent = async (rent: Aluguel) => {
     await axios.post(`http://${envApp}/api/v1/alugueis`, rent);

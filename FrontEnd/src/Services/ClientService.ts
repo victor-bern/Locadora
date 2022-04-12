@@ -1,6 +1,7 @@
 import axios from "axios"
 import Cliente from "../Models/Cliente"
-const envApp = process.env.APP ?? "localhost"
+const envApp = process.env.APP ?? "localhost:5027"
+
 export const SaveClient = async (client: Cliente) => {
     await axios.post(`http://${envApp}/api/v1/clientes`, client);
 }

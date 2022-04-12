@@ -1,7 +1,8 @@
 import axios from "axios"
 import Filme from "../Models/Filme"
 
-const envApp = process.env.APP ?? "localhost"
+const envApp = process.env.APP ?? "localhost:5027"
+
 
 export const SaveMovie = async (movie: Filme) => {
     await axios.post(`http://${envApp}/api/v1/filmes`, movie);
