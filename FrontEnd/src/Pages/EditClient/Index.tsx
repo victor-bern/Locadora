@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import locadoraContext from "../../Context/LocadoraContext";
 import Cliente from "../../Models/Cliente";
 import Error from "../../Models/Error";
-import { EditClient, GetById, SaveClient } from "../../Services/ClientService";
+import { EditClient, GetById } from "../../Services/ClientService";
 import { Container } from "./styles";
 
 const EditClientPage: React.FC = () => {

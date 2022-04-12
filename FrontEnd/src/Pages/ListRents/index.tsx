@@ -12,7 +12,6 @@ const ListRents: React.FC = () => {
             await fetchAlugueis();
         }
         fetch();
-        console.log(alugueis)
     }, [])
     return (
         <>
@@ -46,7 +45,6 @@ const ListRents: React.FC = () => {
                                 <TableCell align="left">{aluguel.DataDevolucao}</TableCell>
                                 <TableCell align="left">
                                     <Box>
-                                        <Button><Link style={{ textDecoration: "none" }} to={"/clientes/editar/" + aluguel.id}>Editar</Link></Button>
                                         <Button color="error" onClick={async () => {
                                             await DeleteRent(aluguel.id!.toString())
                                             await fetchAlugueis();

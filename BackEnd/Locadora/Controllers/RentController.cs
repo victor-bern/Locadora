@@ -78,8 +78,6 @@ namespace Locadora.Controllers
                 {
                     ClientId = model.ClientId,
                     MovieId = model.MovieId,
-                    RentDate = model.RentDate,
-                    ReturnDate = model.ReturnDate,
                 };
 
 

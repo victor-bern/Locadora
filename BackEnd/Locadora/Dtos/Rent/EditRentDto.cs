@@ -13,14 +13,5 @@ namespace Locadora.Dtos.Rent
         [Required]
         public int MovieId { get; set; }
 
-        [JsonPropertyName("DataLocacao")]
-        public DateTime RentDate { get; set; }
-        [JsonPropertyName("DataDevolucao")]
-        public DateTime ReturnDate { get; set; }
-
-        public EditRentDto()
-        {
-            RentDate = DateTime.UtcNow;
-        }
     }
 }

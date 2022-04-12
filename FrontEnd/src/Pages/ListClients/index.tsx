@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import locadoraContext from "../../Context/LocadoraContext";
 import { DeleteClient } from "../../Services/ClientService";
-import { DeleteMovie } from "../../Services/MovieService";
 
 const ListClients: React.FC = () => {
     const { fetchClientes, clientes } = useContext(locadoraContext);
