@@ -9,6 +9,6 @@ namespace Locadora.Domain.Entities
         [JsonPropertyName("ClassificacaoIndicativa")]
         public int ParentalRating { get; set; }
         [JsonPropertyName("Lancamento")]
-        public bool IsReleased { get; set; }
+        public int ReleaseYear { get; set; }
     }
 }

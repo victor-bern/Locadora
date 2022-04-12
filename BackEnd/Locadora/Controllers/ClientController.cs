@@ -18,5 +18,22 @@ namespace Locadora.Controllers
 
             return Ok(cliente);
         }
+
+        public override async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var error = await _repository.Delete(id);
+
+                if (error != null) return BadRequest(error);
+
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

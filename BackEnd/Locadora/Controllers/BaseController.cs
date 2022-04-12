@@ -73,8 +73,6 @@ namespace Locadora.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-
                 var error = await _repository.Delete(id);
 
                 if (error != null) return BadRequest(error);

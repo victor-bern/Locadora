@@ -26,7 +26,7 @@ namespace Locadora.Dtos.Rent
 
         public void SetMovieReturnDate()
         {
-            ReturnDate = Movie.IsReleased ? DateTime.UtcNow.AddDays(2) : DateTime.UtcNow.AddDays(3);
+            ReturnDate = Movie.ReleaseYear >= DateTime.UtcNow.Year ? DateTime.UtcNow.AddDays(2) : DateTime.UtcNow.AddDays(3);
         }
     }
 }

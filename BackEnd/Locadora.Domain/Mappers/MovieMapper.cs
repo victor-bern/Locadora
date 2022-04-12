@@ -11,7 +11,7 @@ namespace Locadora.Domain.Mappers
             Map(x => x.Id).ToColumn("Id").IsKey();
             Map(x => x.Title).ToColumn("Titulo");
             Map(x => x.ParentalRating).ToColumn("ClassificacaoIndicativa");
-            Map(x => x.IsReleased).ToColumn("Lancamento");
+            Map(x => x.ReleaseYear).ToColumn("Lancamento");
         }
     }
 }

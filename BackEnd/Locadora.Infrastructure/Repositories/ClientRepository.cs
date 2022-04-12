@@ -18,5 +18,27 @@ namespace Locadora.Infrastructure.Repositories
 
             return client;
         }
+
+        public override async Task<Error?> Delete(int id)
+        {
+            try
+            {
+                using var connection = _database.GetConnection();
+
+                var entity = await connection.GetAsync<Client>(id);
+
+                if (entity == null) return new Error("Não foi possível encontrar um item esse id");
+
+                await connection.DeleteMultipleAsync<Rent>(item => item.ClientId == entity.Id);
+
+                await connection.DeleteAsync(entity);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return new Error(ex.Message);
+            }
+
+        }
     }
 }
